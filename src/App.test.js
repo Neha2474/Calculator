@@ -1,8 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('displays the calculated result', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  fireEvent.click(screen.getByDisplayValue('7'));
+  fireEvent.click(screen.getByDisplayValue('+'));
+  fireEvent.click(screen.getByDisplayValue('3'));
+  fireEvent.click(screen.getByDisplayValue('='));
+
+  expect(screen.getByLabelText('Calculator display')).toHaveValue('10');
 });
